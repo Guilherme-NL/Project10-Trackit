@@ -12,11 +12,11 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={HomeScreen} />
-          <Route path="/cadastro" element={RegistrationScreen} />
-          <Route path="/habitos" element={HabitsScreen} />
-          <Route path="/hoje" element={TodayScreen} />
-          <Route path="/historico" element={HistoryScreen} />
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/cadastro" element={<RegistrationScreen />} />
+          <Route path="/habitos" element={<HabitsScreen />} />
+          <Route path="/hoje" element={<TodayScreen />} />
+          <Route path="/historico" element={<HistoryScreen />} />
         </Routes>
       </BrowserRouter>
     </>
