@@ -1,10 +1,22 @@
 import Topbar from "./Topbar";
+import Bottombar from "./Bottombar";
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 export default function TodayScreen() {
   return (
-    <>
+    <Container>
+      <GlobalStyle />
       <Topbar />
-      <div>Today</div>
-    </>
+      <Bottombar />
+    </Container>
   );
 }
+
+const Container = styled.div``;
+
+const GlobalStyle = createGlobalStyle`
+ body {
+   background: #e5e5e5;
+ }
+`;
