@@ -2,32 +2,12 @@ import Topbar from "./Topbar";
 import Bottombar from "./Bottombar";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
-import axios from "axios";
 import React from "react";
-import { useContext } from "react";
-import UserDataContext from "../contexts/UserDataContext";
 
 import NewHabit from "./NewHabit";
+import RenderListedHabits from "./RenderHabits";
 
 export default function HabitsScreen() {
-  const { token } = useContext(UserDataContext);
-
-  const [listedHabits, setListedHabits] = React.useState([]);
-  console.log(listedHabits);
-
-  React.useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const url =
-      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
-    axios.get(url, config).then((response) => {
-      setListedHabits(response.data);
-    });
-  }, []);
-
   const [createHabitWindow, setCreateHabitWindow] = React.useState(false);
 
   return (
@@ -43,9 +23,7 @@ export default function HabitsScreen() {
       ) : (
         <></>
       )}
-      {listedHabits.length === 0
-        ? "Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!"
-        : "tem coisa aqui"}
+      <RenderListedHabits />
       <Bottombar />
     </Container>
   );

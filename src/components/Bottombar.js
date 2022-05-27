@@ -4,7 +4,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function Bottombar() {
-  const percentage = 66;
+  const percentage = 30;
 
   function progressbar() {
     return (

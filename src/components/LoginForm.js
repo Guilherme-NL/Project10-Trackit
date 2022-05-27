@@ -21,8 +21,8 @@ export default function LoginForm({ setUserData }) {
       .post(url, body)
       .then((response) => {
         setUserData(response.data);
-        navigate("/hoje");
         setIsLoading(false);
+        navigate("/hoje");
       })
       .catch((err) => {
         alert(err.response.statusText);
