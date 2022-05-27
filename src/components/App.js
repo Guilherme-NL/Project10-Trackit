@@ -10,7 +10,7 @@ import HistoryScreen from "./History";
 
 export default function App() {
   const [userData, setUserData] = React.useState({});
-  console.log(userData);
+
   return (
     <>
       <BrowserRouter>
