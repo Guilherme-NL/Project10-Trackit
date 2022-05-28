@@ -9,8 +9,6 @@ import TodayScreen from "./Today";
 import HistoryScreen from "./History";
 
 export default function App() {
-  const [userData, setUserData] = React.useState({});
-
   return (
     <>
       <BrowserRouter>

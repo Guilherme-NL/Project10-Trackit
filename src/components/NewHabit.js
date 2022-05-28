@@ -3,7 +3,11 @@ import React from "react";
 import axios from "axios";
 import { useUserData } from "../contexts/UserDataContext";
 
-export default function NewHabit({ setCreateHabitWindow }) {
+export default function NewHabit({
+  setCreateHabitWindow,
+  listedHabits,
+  setListedHabits,
+}) {
   const [{ token }] = useUserData();
 
   const DaysArr = [
@@ -40,9 +44,8 @@ export default function NewHabit({ setCreateHabitWindow }) {
     axios
       .post(url, body, config)
       .then((response) => {
-        console.log(response.data);
+        setListedHabits([...listedHabits, response.data]);
         setCreateHabitWindow(false);
-        setIsLoading(false);
       })
       .catch((err) => {
         alert(err.response.statusText);

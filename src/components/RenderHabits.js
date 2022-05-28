@@ -15,10 +15,8 @@ const DaysArr = [
   { number: 7, name: "S", isSelected: false },
 ];
 
-export default function RenderListedHabits() {
+export default function RenderListedHabits({ listedHabits, setListedHabits }) {
   const [{ token }] = useUserData();
-
-  const [listedHabits, setListedHabits] = React.useState([]);
 
   React.useEffect(() => {
     const config = {
@@ -51,39 +49,55 @@ export default function RenderListedHabits() {
   }
 
   return (
-    <>
-      {listedHabits.map((listedHabit) => {
-        return (
-          <Container key={listedHabit.id}>
-            <div>{listedHabit.name}</div>
-            <Days>
-              {DaysArr.map((day) => {
-                return (
-                  <Day
-                    key={day.number}
-                    selected={listedHabit.days.includes(day.number)}
-                  >
-                    {day.name}
-                  </Day>
-                );
-              })}
-            </Days>
-            <Trash
-              src={trash}
-              alt="trash"
-              onClick={() => {
-                if (window.confirm("Tem certeza que quer deletar esse hábito?"))
-                  deleteHabit(listedHabit);
-              }}
-            />
-          </Container>
-        );
-      })}
-    </>
+    <Container>
+      {listedHabits.length === 0 ? (
+        <p>
+          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+          começar a trackear!
+        </p>
+      ) : (
+        listedHabits.map((listedHabit) => {
+          return (
+            <MyHabits key={listedHabit.id}>
+              <div>{listedHabit.name}</div>
+              <Days>
+                {DaysArr.map((day) => {
+                  return (
+                    <Day
+                      key={day.number}
+                      selected={listedHabit.days.includes(day.number)}
+                    >
+                      {day.name}
+                    </Day>
+                  );
+                })}
+              </Days>
+              <Trash
+                src={trash}
+                alt="trash"
+                onClick={() => {
+                  if (
+                    window.confirm("Tem certeza que quer deletar esse hábito?")
+                  )
+                    deleteHabit(listedHabit);
+                }}
+              />
+            </MyHabits>
+          );
+        })
+      )}
+    </Container>
   );
 }
 
 const Container = styled.div`
+  p {
+    font-size: 18px;
+    color: #666666;
+  }
+`;
+
+const MyHabits = styled.div`
   width: 100%;
   height: 91px;
   background-color: #ffffff;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export default function Bottombar() {
+export default function Bottombar({ todayHabits }) {
   const percentage = 30;
 
   function progressbar() {

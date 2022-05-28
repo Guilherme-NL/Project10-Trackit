@@ -9,21 +9,29 @@ import RenderListedHabits from "./RenderHabits";
 
 export default function HabitsScreen() {
   const [createHabitWindow, setCreateHabitWindow] = React.useState(false);
+  const [listedHabits, setListedHabits] = React.useState([]);
 
   return (
     <Container>
       <GlobalStyle />
       <Topbar />
-      <CreateHabits>
+      <CreateHabitsButton>
         <h1>Meus hábitos</h1>
         <div onClick={() => setCreateHabitWindow(true)}>+</div>
-      </CreateHabits>
+      </CreateHabitsButton>
       {createHabitWindow ? (
-        <NewHabit setCreateHabitWindow={setCreateHabitWindow} />
+        <NewHabit
+          setCreateHabitWindow={setCreateHabitWindow}
+          listedHabits={listedHabits}
+          setListedHabits={setListedHabits}
+        />
       ) : (
         <></>
       )}
-      <RenderListedHabits />
+      <RenderListedHabits
+        listedHabits={listedHabits}
+        setListedHabits={setListedHabits}
+      />
       <Bottombar />
     </Container>
   );
@@ -40,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
  }
 `;
 
-const CreateHabits = styled.div`
+const CreateHabitsButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
