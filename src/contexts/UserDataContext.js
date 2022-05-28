@@ -2,12 +2,20 @@ import React from "react";
 
 const UserDataContext = React.createContext();
 
+const USER_DATA = "__user_data__";
+
 function UserDataProvider(props) {
-  const [userData, setUserData] = React.useState(null);
+  const [userData, setUserData] = React.useState(
+    () => JSON.parse(window.localStorage.getItem(USER_DATA)) || null
+  );
 
   return (
     <UserDataContext.Provider value={[userData, setUserData]} {...props} />
   );
+}
+
+function saveUserDataInLocalStorage(userData) {
+  window.localStorage.setItem(USER_DATA, JSON.stringify(userData));
 }
 
 function useUserData() {
@@ -18,4 +26,4 @@ function useUserData() {
   return context;
 }
 
-export { UserDataProvider, useUserData };
+export { UserDataProvider, useUserData, saveUserDataInLocalStorage };

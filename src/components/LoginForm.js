@@ -3,7 +3,10 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useUserData } from "../contexts/UserDataContext";
+import {
+  useUserData,
+  saveUserDataInLocalStorage,
+} from "../contexts/UserDataContext";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -23,6 +26,7 @@ export default function LoginForm() {
       .post(url, body)
       .then((response) => {
         setUserData(response.data);
+        saveUserDataInLocalStorage(response.data);
         setIsLoading(false);
         navigate("/hoje");
       })
