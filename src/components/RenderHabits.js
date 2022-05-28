@@ -33,14 +33,21 @@ export default function RenderListedHabits() {
     });
   }, []);
 
-  function deleteHabit(id) {
-    const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
+  function deleteHabit(listedHabit) {
+    const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${listedHabit.id}`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    axios.delete(url, config).then();
+    const backupListedHabits = [...listedHabits];
+
+    //optimistic update
+    setListedHabits(listedHabits.filter((habit) => habit !== listedHabit));
+    axios.delete(url, config).catch((err) => {
+      console.log("ops, não foi possível deletar o seu hábito");
+      setListedHabits(backupListedHabits);
+    });
   }
 
   return (
@@ -65,7 +72,8 @@ export default function RenderListedHabits() {
               src={trash}
               alt="trash"
               onClick={() => {
-                if (window.confirm("certeza?")) deleteHabit(listedHabit.id);
+                if (window.confirm("Tem certeza que quer deletar esse hábito?"))
+                  deleteHabit(listedHabit);
               }}
             />
           </Container>
