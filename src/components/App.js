@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import UserDataContext from "../contexts/UserDataContext";
+import { UserDataProvider } from "../contexts/UserDataContext";
 
 import HomeScreen from "./Home";
 import RegistrationScreen from "./Registration";
@@ -14,18 +14,15 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <UserDataContext.Provider value={userData}>
+        <UserDataProvider>
           <Routes>
-            <Route
-              path="/"
-              element={<HomeScreen setUserData={setUserData} />}
-            />
+            <Route path="/" element={<HomeScreen />} />
             <Route path="/cadastro" element={<RegistrationScreen />} />
             <Route path="/habitos" element={<HabitsScreen />} />
             <Route path="/hoje" element={<TodayScreen />} />
             <Route path="/historico" element={<HistoryScreen />} />
           </Routes>
-        </UserDataContext.Provider>
+        </UserDataProvider>
       </BrowserRouter>
     </>
   );

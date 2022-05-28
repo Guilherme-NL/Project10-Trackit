@@ -3,13 +3,15 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useUserData } from "../contexts/UserDataContext";
 
-export default function LoginForm({ setUserData }) {
+export default function LoginForm() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [, setUserData] = useUserData();
 
   function sendLogin(e) {
     e.preventDefault();

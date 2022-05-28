@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { useContext } from "react";
-import UserDataContext from "../contexts/UserDataContext";
+import { useUserData } from "../contexts/UserDataContext";
 
 import trackit from "../assets/TrackIt.png";
 
 export default function Topbar() {
-  const { name, image } = useContext(UserDataContext);
+  const [{ name, image }] = useUserData();
   return (
     <Container>
       <img src={trackit} alt="trackit" />

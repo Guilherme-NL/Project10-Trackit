@@ -1,5 +1,21 @@
-import { createContext } from "react";
+import React from "react";
 
-const UserDataContext = createContext();
+const UserDataContext = React.createContext();
 
-export default UserDataContext;
+function UserDataProvider(props) {
+  const [userData, setUserData] = React.useState(null);
+
+  return (
+    <UserDataContext.Provider value={[userData, setUserData]} {...props} />
+  );
+}
+
+function useUserData() {
+  const context = React.useContext(UserDataContext);
+  if (!context) {
+    throw new Error("useUserData must be used within a UserDataContext");
+  }
+  return context;
+}
+
+export { UserDataProvider, useUserData };

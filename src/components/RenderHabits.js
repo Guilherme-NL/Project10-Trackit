@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import React from "react";
-import { useContext } from "react";
-import UserDataContext from "../contexts/UserDataContext";
+import { useUserData } from "../contexts/UserDataContext";
 
 import trash from "../assets/trash.png";
 
@@ -17,7 +16,7 @@ const DaysArr = [
 ];
 
 export default function RenderListedHabits() {
-  const { token } = useContext(UserDataContext);
+  const [{ token }] = useUserData();
 
   const [listedHabits, setListedHabits] = React.useState([]);
 
@@ -41,8 +40,7 @@ export default function RenderListedHabits() {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log(url);
-    axios.delete(url, config).then(console.log());
+    axios.delete(url, config).then();
   }
 
   return (

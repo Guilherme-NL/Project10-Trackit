@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import React from "react";
 import axios from "axios";
-import { useContext } from "react";
-import UserDataContext from "../contexts/UserDataContext";
+import { useUserData } from "../contexts/UserDataContext";
 
 export default function NewHabit({ setCreateHabitWindow }) {
-  const { token } = useContext(UserDataContext);
+  const [{ token }] = useUserData();
 
   const DaysArr = [
     { number: 1, name: "D", isSelected: false },
@@ -36,8 +35,6 @@ export default function NewHabit({ setCreateHabitWindow }) {
       },
     };
 
-    console.log(token);
-
     const url =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     axios
@@ -61,7 +58,6 @@ export default function NewHabit({ setCreateHabitWindow }) {
       isSelected: !updatedDays[index].isSelected,
     };
     setDays(updatedDays);
-    console.log(updatedDays);
   }
 
   return (

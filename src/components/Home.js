@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 import LoginForm from "./LoginForm";
 
-export default function HomeScreen({ setUserData }) {
+export default function HomeScreen() {
   return (
     <Container>
       <img src={logo} alt="logo" />
-      <LoginForm setUserData={setUserData} />
+      <LoginForm />
       <Link to="/cadastro">
         <p>Não tem uma conta? Cadastre-se</p>
       </Link>
