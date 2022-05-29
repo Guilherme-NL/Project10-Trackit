@@ -11,7 +11,7 @@ import RenderTodayHabits from "./RenderTodayHabits";
 
 export default function TodayScreen() {
   const [todayHabits] = useTodayHabits();
-  const percentage = calcPercentage(todayHabits);
+  const percentage = calcPercentage(todayHabits).toFixed(0);
 
   function today() {
     const dayjs = require("dayjs");
