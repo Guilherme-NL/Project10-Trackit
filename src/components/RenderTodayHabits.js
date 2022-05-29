@@ -51,8 +51,17 @@ export default function RenderTodayHabits() {
         return (
           <Container key={todayHabit.id}>
             <h1>{todayHabit.name}</h1>
-            <h2>Sequência atual: {todayHabit.currentSequence} dias</h2>
-            <h2>Seu recorde: {todayHabit.highestSequence} dias</h2>
+            <Sequence
+              currentSequence={todayHabit.currentSequence}
+              highestSequence={todayHabit.highestSequence}
+            >
+              <h2>
+                Sequência atual: <span>{todayHabit.currentSequence} dias</span>
+              </h2>
+              <h2>
+                Seu recorde: <span>{todayHabit.highestSequence} dias</span>
+              </h2>
+            </Sequence>
             <Chek done={todayHabit.done}>
               <ion-icon
                 onClick={() => mark(todayHabit)}
@@ -80,10 +89,20 @@ const Container = styled.div`
     color: #666666;
     margin-bottom: 7px;
   }
+`;
 
+const Sequence = styled.div`
   h2 {
     font-size: 13px;
     color: #666666;
+  }
+
+  span {
+    color: ${(props) =>
+      props.highestSequence === props.currentSequence &&
+      props.currentSequence !== 0
+        ? "#8FC549"
+        : "#666666"};
   }
 `;
 

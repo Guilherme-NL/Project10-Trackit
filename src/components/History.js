@@ -8,12 +8,29 @@ export default function HistoryScreen() {
     <Container>
       <GlobalStyle />
       <Topbar />
+      <h1>Histórico</h1>
+      <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
       <Bottombar />
     </Container>
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding: 18px;
+  margin-top: 70px;
+  margin-bottom: 80px;
+
+  > h1 {
+    font-size: 23px;
+    color: #126ba5;
+    margin-bottom: 20px;
+  }
+
+  > p {
+    font-size: 18px;
+    color: #666666;
+  }
+`;
 
 const GlobalStyle = createGlobalStyle`
  body {

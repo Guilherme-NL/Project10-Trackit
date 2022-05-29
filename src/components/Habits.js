@@ -40,6 +40,7 @@ export default function HabitsScreen() {
 const Container = styled.div`
   padding: 18px;
   margin-top: 70px;
+  margin-bottom: 80px;
 `;
 
 const GlobalStyle = createGlobalStyle`

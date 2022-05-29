@@ -39,6 +39,7 @@ export default function TodayScreen() {
 const Container = styled.div`
   padding: 18px;
   margin-top: 70px;
+  margin-bottom: 80px;
 
   > h1 {
     color: #bababa;
