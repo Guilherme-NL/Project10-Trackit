@@ -19,29 +19,47 @@ export default function RenderTodayHabits() {
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
     axios.get(url, config).then((response) => {
       setTodayHabits(response.data);
-      console.log(response.data);
     });
   }, []);
 
   function mark(todayHabit) {
+    const backupTodayHabits = [...todayHabits];
+    const updatedTodayHabits = [...todayHabits];
+
     if (todayHabit.done) {
       const body = {};
       const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${todayHabit.id}/uncheck`;
-      axios
-        .post(url, body, config)
-        .then(window.location.reload())
-        .catch((err) => {
-          alert(err.response.statusText);
-        });
+
+      //optimistic update
+      const index = updatedTodayHabits.indexOf(todayHabit);
+      updatedTodayHabits[index] = {
+        ...updatedTodayHabits[index],
+        done: false,
+        currentSequence: updatedTodayHabits[index].currentSequence - 1,
+        highestSequence: updatedTodayHabits[index].highestSequence - 1,
+      };
+      setTodayHabits(updatedTodayHabits);
+
+      axios.post(url, body, config).catch((err) => {
+        console.log("ops, não foi possível desmarcar o hábito");
+        setTodayHabits(backupTodayHabits);
+      });
     } else {
       const body = {};
       const url = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${todayHabit.id}/check`;
-      axios
-        .post(url, body, config)
-        .then(window.location.reload())
-        .catch((err) => {
-          alert(err.response.statusText);
-        });
+
+      //optimistic update
+      const index = updatedTodayHabits.indexOf(todayHabit);
+      updatedTodayHabits[index] = {
+        ...updatedTodayHabits[index],
+        done: true,
+        currentSequence: updatedTodayHabits[index].currentSequence + 1,
+        highestSequence: updatedTodayHabits[index].highestSequence + 1,
+      };
+      setTodayHabits(updatedTodayHabits);
+      axios.post(url, body, config).catch((err) => {
+        alert(err.response.statusText);
+      });
     }
   }
 
