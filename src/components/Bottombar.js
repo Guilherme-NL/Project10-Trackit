@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useTodayHabits, calcPercentage } from "../contexts/TodayHabitsContext";
 
-export default function Bottombar({ todayHabits }) {
-  const percentage = 30;
+export default function Bottombar() {
+  const [todayHabits] = useTodayHabits();
+
+  const percentage = calcPercentage(todayHabits);
 
   function progressbar() {
     return (

@@ -2,9 +2,11 @@ import axios from "axios";
 import { useUserData } from "../contexts/UserDataContext";
 import React from "react";
 import styled from "styled-components";
+import { useTodayHabits } from "../contexts/TodayHabitsContext";
 
-export default function RenderTodayHabits({ todayHabits, setTodayHabits }) {
+export default function RenderTodayHabits() {
   const [{ token }] = useUserData();
+  const [todayHabits, setTodayHabits] = useTodayHabits();
 
   const config = {
     headers: {

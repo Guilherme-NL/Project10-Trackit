@@ -3,13 +3,15 @@ import Bottombar from "./Bottombar";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import React from "react";
+import { useTodayHabits, calcPercentage } from "../contexts/TodayHabitsContext";
 
 import "dayjs/locale/pt-br";
 
 import RenderTodayHabits from "./RenderTodayHabits";
 
 export default function TodayScreen() {
-  const [todayHabits, setTodayHabits] = React.useState([]);
+  const [todayHabits] = useTodayHabits();
+  const percentage = calcPercentage(todayHabits);
 
   function today() {
     const dayjs = require("dayjs");
@@ -23,12 +25,13 @@ export default function TodayScreen() {
       <GlobalStyle />
       <Topbar />
       {today()}
-      <p>Nenhum hábito concluído aionda</p>
-      <RenderTodayHabits
-        todayHabits={todayHabits}
-        setTodayHabits={setTodayHabits}
-      />
-      <Bottombar todayHabits={todayHabits} />
+      {todayHabits.filter((habit) => habit.done === true).length === 0 ? (
+        <h1>Nenhum hábito concluído aionda</h1>
+      ) : (
+        <h2>{percentage}% dos hábitos concluídos</h2>
+      )}
+      <RenderTodayHabits />
+      <Bottombar />
     </Container>
   );
 }
@@ -37,8 +40,14 @@ const Container = styled.div`
   padding: 18px;
   margin-top: 70px;
 
-  p {
+  > h1 {
     color: #bababa;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  > h2 {
+    color: #8fc549;
     font-size: 18px;
     margin-bottom: 30px;
   }

@@ -6,13 +6,13 @@ import { useUserData } from "../contexts/UserDataContext";
 import trash from "../assets/trash.png";
 
 const DaysArr = [
-  { number: 1, name: "D", isSelected: false },
-  { number: 2, name: "S", isSelected: false },
-  { number: 3, name: "T", isSelected: false },
+  { number: 0, name: "D", isSelected: false },
+  { number: 1, name: "S", isSelected: false },
+  { number: 2, name: "T", isSelected: false },
+  { number: 3, name: "Q", isSelected: false },
   { number: 4, name: "Q", isSelected: false },
-  { number: 5, name: "Q", isSelected: false },
+  { number: 5, name: "S", isSelected: false },
   { number: 6, name: "S", isSelected: false },
-  { number: 7, name: "S", isSelected: false },
 ];
 
 export default function RenderListedHabits({ listedHabits, setListedHabits }) {
